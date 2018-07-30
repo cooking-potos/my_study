@@ -16,9 +16,7 @@ client.on('message', async message => {
 	if (message.author.id === client.user.id) {
 		return;
 	}
-	if (message.author.id === '331432897888387072') {
-		return;
-	}
+	
 	let channnel_name = message.channel.name;
 
 	if(channnel_name === '掲示板' || channnel_name === 'general')
