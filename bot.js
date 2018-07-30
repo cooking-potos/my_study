@@ -32,7 +32,7 @@ client.on('message', async message => {
 			message.delete()
 			 
 		}
-	
+	}
 	if(channnel_name === '掲示板')
 	{
 		if(message.content.match(/discord.gg\//))//match(/https:\/\/discord.gg\//))
