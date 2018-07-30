@@ -16,32 +16,25 @@ client.on('message', async message => {
 	if (message.author.id === client.user.id) {
 		return;
 	}
-	
 	if (message.author.id === '331432897888387072') {
 		return;
 	}
-	
 	let channnel_name = message.channel.name;
 
 	if(channnel_name === '掲示板' || channnel_name === 'general')
 	{
-		
 		if(message.mentions.everyone)
 		{
-			
-			message.delete()
-			 
+			message.delete();		 
 		}
 	}
 	if(channnel_name === '掲示板')
 	{
-		if(message.content.match(/discord.gg\//))//match(/https:\/\/discord.gg\//))
+		if(message.content.match(/discord.gg\//))
 		{
-			message.delete()
-			  
+			message.delete();
 		}
 	}
-	
 });
 
 client.login(process.env.BOT_TOKEN);
