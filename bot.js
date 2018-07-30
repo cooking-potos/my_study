@@ -16,10 +16,12 @@ client.on('message', async message => {
 	if (message.author.id === client.user.id) {
 		return;
 	}
-	
+	if (message.author.id === process.env.AD_ID) {
+		return;
+	}
 	let channnel_name = message.channel.name;
 
-	if(channnel_name === '掲示板' || channnel_name === 'general')
+	if(channnel_name === '掲示板' || channnel_name === '開発メンバー募集')
 	{
 		if(message.mentions.everyone)
 		{
@@ -36,16 +38,3 @@ client.on('message', async message => {
 });
 
 client.login(process.env.BOT_TOKEN);
-
-function sleep(waitSec, callbackFunc) {
-        var spanedSec = 0;
-        var id = setInterval(function () {
-            spanedSec++;
-            if (spanedSec >= waitSec) {
-                clearInterval(id);
-                if (callbackFunc) {
-                    callbackFunc();
-                }
-            }
-        }, 1000);
-    }
