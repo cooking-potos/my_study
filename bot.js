@@ -17,7 +17,7 @@ client.on('message', async message => {
 		return;
 	}
 	
-	if (message.author.id === process.env.MY_ID) {
+	if (message.author.id === '331432897888387072') {
 		return;
 	}
 	
