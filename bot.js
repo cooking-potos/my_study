@@ -21,7 +21,7 @@ client.on('message', message => {
 	}
 	let channnel_name = message.channel.name;
 
-	if(channnel_name === '掲示板' || channnel_name === 'ゲーム開発関連の募集' || channnel_name === 'general')
+	if(channnel_name === '掲示板' || channnel_name === '募集(ゲーム開発関連)' || channnel_name === 'general')
 	{
 		if(message.mentions.everyone)
 		{
