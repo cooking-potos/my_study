@@ -12,19 +12,20 @@ client.on('ready', () => {
 	});
 });
 
-client.on('message', async message => {
+client.on('message', message => {
 	if (message.author.id === client.user.id) {
 		return;
 	}
-	if (message.author.id === process.env.AD_ID) {
-		return;
-	}
+	//if (message.author.id === process.env.AD_ID) {
+	//	return;
+	//}
 	let channnel_name = message.channel.name;
 
 	if(channnel_name === '掲示板' || channnel_name === '募集' || channnel_name === 'general')
 	{
 		if(message.mentions.everyone)
 		{
+			console.log('del everyone');
 			message.delete();		 
 		}
 	}
