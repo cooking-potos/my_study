@@ -6,9 +6,9 @@ const client = new Discord.Client();
 
 // 準備完了イベントのconsole.logで通知黒い画面に出る。
 client.on('ready', () => {
-    console.log('ready...');
-	client.user.setActivity('アニマルビデオ', {
-		type: 'WATCHING'
+    	console.log('ready...');
+	client.user.setActivity('みんなの代わりにゲーム', {
+		type: 'PLAYING'
 	});
 });
 
@@ -21,10 +21,11 @@ client.on('message', async message => {
 	}
 	let channnel_name = message.channel.name;
 
-	if(channnel_name === '掲示板' || channnel_name === '開発メンバー募集')
+	if(channnel_name === '掲示板' || channnel_name === '募集')
 	{
 		if(message.mentions.everyone)
 		{
+			console.log('del everyone mention');
 			message.delete();		 
 		}
 	}
@@ -32,6 +33,7 @@ client.on('message', async message => {
 	{
 		if(message.content.match(/discord.gg\//))
 		{
+			console.log('del bbs discordlink');
 			message.delete();
 		}
 	}
