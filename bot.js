@@ -21,11 +21,10 @@ client.on('message', async message => {
 	}
 	let channnel_name = message.channel.name;
 
-	if(channnel_name === '掲示板' || channnel_name === '募集')
+	if(channnel_name === '掲示板' || channnel_name === '募集' || channnel_name === 'general')
 	{
 		if(message.mentions.everyone)
 		{
-			console.log('del everyone mention');
 			message.delete();		 
 		}
 	}
@@ -33,7 +32,6 @@ client.on('message', async message => {
 	{
 		if(message.content.match(/discord.gg\//))
 		{
-			console.log('del bbs discordlink');
 			message.delete();
 		}
 	}
