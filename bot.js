@@ -21,20 +21,20 @@ client.on('message', message => {
 	}
 	let channnel_name = message.channel.name;
 
-	if(channnel_name === '掲示板' || channnel_name === '募集-ゲーム開発関連' || channnel_name === 'general')
+	if(channnel_name === '掲示板' || channnel_name === '募集-ゲーム開発関連')
 	{
 		if(message.mentions.everyone)
 		{
 			console.log('del everyone');
 			message.delete();		 
 		}
-	}
-	else if(channnel_name === '掲示板')
-	{
-		if(message.content.match(/discord.gg\//))
+		else if(channnel_name === '掲示板')
 		{
-			console.log('del discord_link');
-			message.delete();
+			if(message.content.match(/discord.gg\//))
+			{
+				console.log('del discord_link');
+				message.delete();
+			}
 		}
 	}
 });
