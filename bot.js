@@ -16,9 +16,9 @@ client.on('message', message => {
 	if (message.author.id === client.user.id) {
 		return;
 	}
-	//if (message.author.id === process.env.AD_ID) {
-	//	return;
-	//}
+	if (message.author.id === process.env.AD_ID) {
+		return;
+	}
 	let channnel_name = message.channel.name;
 
 	if(channnel_name === '掲示板' || channnel_name === '募集' || channnel_name === 'general')
@@ -33,6 +33,7 @@ client.on('message', message => {
 	{
 		if(message.content.match(/discord.gg\//))
 		{
+			console.log('del discord_link');
 			message.delete();
 		}
 	}
