@@ -29,7 +29,7 @@ client.on('message', message => {
 			message.delete();		 
 		}
 	}
-	if(channnel_name === '掲示板')
+	else if(channnel_name === '掲示板')
 	{
 		if(message.content.match(/discord.gg\//))
 		{
