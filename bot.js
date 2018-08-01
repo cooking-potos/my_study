@@ -20,18 +20,19 @@ client.on('message', message => {
 		return;
 	}
 	let channnel_name = message.channel.name;
+	let username = message.author.username;
 
 	if(channnel_name === '掲示板' || channnel_name === '募集-ゲーム開発関連')
 	{
 		//if(message.mentions.everyone)
 		if(message.content.match(/@everyone/))
 		{
-			console.log('del everyone');
+			console.log('del everyone '+username);
 			message.delete();		 
 		}
 		else if(message.content.match(/discord.gg\//))
 		{
-			console.log('del discord_link');
+			console.log('del discord_link '+username);
 			message.delete();
 		}
 	}
