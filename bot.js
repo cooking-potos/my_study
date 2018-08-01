@@ -29,13 +29,10 @@ client.on('message', message => {
 			console.log('del everyone');
 			message.delete();		 
 		}
-		else if(channnel_name === '掲示板')
+		else if(message.content.match(/discord.gg\//))
 		{
-			if(message.content.match(/discord.gg\//))
-			{
-				console.log('del discord_link');
-				message.delete();
-			}
+			console.log('del discord_link');
+			message.delete();
 		}
 	}
 });
