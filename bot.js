@@ -23,7 +23,8 @@ client.on('message', message => {
 
 	if(channnel_name === '掲示板' || channnel_name === '募集-ゲーム開発関連')
 	{
-		if(message.mentions.everyone)
+		//if(message.mentions.everyone)
+		if(message.content.match(/@everyone/))
 		{
 			console.log('del everyone');
 			message.delete();		 
