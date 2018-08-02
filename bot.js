@@ -24,8 +24,10 @@ client.on('message', message => {
 	{
 		if(channnel_name === 'main')
 		{
-			channel.fetchMessages({around: message.id, limit: 100 })//{around: message.id, limit: 3 }
+			channel.fetchMessages({limit: 100 })//{around: message.id, limit: 3 }
+				
 				  .then(messages => {
+						console.log("検索数="+messages.size);
 						const filtered_mes = messages.filter(msg => msg.content.match(/```/) && msg.author.id === author_id);
 						const first_mes = filtered_mes.first();
 						if(filtered_mes.size > 0)
