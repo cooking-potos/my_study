@@ -24,38 +24,59 @@ client.on('message', message => {
 	{
 		if(channnel_name === 'main')
 		{
-			channel.fetchMessages({limit: 100 })//{around: message.id, limit: 3 }
-				
+			channel.fetchMessages({limit:100})//{around: message.id, limit: 3 }
 				  .then(messages => {
-						console.log("検索数="+messages.size);
-						const filtered_mes = messages.filter(msg => msg.content.match(/```/) && msg.author.id === author_id);
-						const first_mes = filtered_mes.first();
+						console.log("1回目:"+messages.size)
+						var filtered_mes = messages.filter(msg => msg.content.match(/```/) && msg.author.id === author_id);
+						var first_mes = filtered_mes.first();
+						
 						if(filtered_mes.size > 0)
 						{
-							var comment = first_mes.content.replace(/```/g, '');
-							console.log(comment+" "+username);
+							comment = first_mes.content.replace(/```/g, '');
+							do_after_get_comment();
 						}
 						else
 						{
-							var comment = "直近の黒枠書き込みはありません。";
-							console.log(comment+" "+username);
-						}
-						
-						sleep(3,function () {
-							console.log('3sec spanned logged at callback function.');
-							message.delete();
-							return;
-						});
-						message.reply(comment)
-							.then(sent => {
-								sleep(20,function () {
-									console.log('del bot reply');
-									sent.delete();
-									return;
+							
+							var last_message = messages.last();
+							channel.fetchMessages({limit:100,before:last_message.id})//{around: message.id, limit: 3 }
+								  .then(messages => {
+										console.log("2回目:"+messages.size)
+										filtered_mes = messages.filter(msg => msg.content.match(/```/) && msg.author.id === author_id);
+										first_mes = filtered_mes.first();
+										
+										if(filtered_mes.size > 0)
+										{
+											comment = first_mes.content.replace(/```/g, '');
+											do_after_get_comment();
+										}
+										else
+										{
+											
+											var last_message = messages.last();
+											channel.fetchMessages({limit:100,before:last_message.id})//{around: message.id, limit: 3 }
+												  .then(messages => {
+														console.log("3回目:"+messages.size)
+														filtered_mes = messages.filter(msg => msg.content.match(/```/) && msg.author.id === author_id);
+														first_mes = filtered_mes.first();
+														
+														if(filtered_mes.size > 0)
+														{
+															comment = first_mes.content.replace(/```/g, '');
+															
+														}
+														else
+														{
+															comment = "直近の300件には黒枠書き込みはありません。";
+															
+														}
+														do_after_get_comment();
+												});
+										}
 								});
-							})
-					})
-				 .catch(console.error);
+						}
+				})
+				.catch(console.error);
 		}
 	}
 	
@@ -76,6 +97,25 @@ client.on('message', message => {
 			message.delete();
 		}
 	}
+	function do_after_get_comment()
+				{
+					
+					sleep(3,function () {
+								console.log('3sec spanned logged at callback function.');
+								
+								message.delete();
+								return;
+							});
+							message.reply(comment)
+								.then(sent => {
+									sleep(20,function () {
+										console.log('del bot reply');
+										
+										sent.delete();
+										return;
+									});
+								})
+				}
 });
 
 client.login(process.env.BOT_TOKEN);
