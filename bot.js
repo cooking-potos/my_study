@@ -24,19 +24,21 @@ client.on('message', message => {
 	{
 		if(channnel_name === 'main')
 		{
-			channel.fetchMessages()//{around: message.id, limit: 3 }
+			channel.fetchMessages({around: message.id, limit: 100 })//{around: message.id, limit: 3 }
 				  .then(messages => {
 						const filtered_mes = messages.filter(msg => msg.content.match(/```/) && msg.author.id === author_id);
 						const first_mes = filtered_mes.first();
 						if(filtered_mes.size > 0)
 						{
 							var comment = first_mes.content.replace(/```/g, '');
+							console.log(comment+" "+username);
 						}
 						else
 						{
 							var comment = "直近の黒枠書き込みはありません。";
+							console.log(comment+" "+username);
 						}
-						console.log(comment+" "+username);
+						
 						sleep(3,function () {
 							console.log('3sec spanned logged at callback function.');
 							message.delete();
