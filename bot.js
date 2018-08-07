@@ -26,7 +26,7 @@ client.on('message', message => {
 		{
 			channel.fetchMessages({limit:100})//{around: message.id, limit: 3 }
 				  .then(messages => {
-						console.log("1回目:"+messages.size)
+						console.log("1回目:"+messages.size+" "+username)
 						var filtered_mes = messages.filter(msg => msg.content.match(/```/) && msg.author.id === author_id);
 						var first_mes = filtered_mes.first();
 						
