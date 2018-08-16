@@ -1,2 +1,1 @@
 # my study
-test
