@@ -81,7 +81,7 @@ client.on('message', message => {
 				.catch(console.error);
 		}
 	}
-	else if(message.content === '!del')
+	else if(message.content === '!del_voice_text')
 	{
 		if(channnel_name === str_voice_text_channel_name)
 		{
