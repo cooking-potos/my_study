@@ -4,6 +4,8 @@ const Discord = require('discord.js');
 // Discord Clientのインスタンス作成
 const client = new Discord.Client();
 
+const str_voice_text_channel_name = "作業室用テキストチャンネル";
+
 // 準備完了イベントのconsole.logで通知黒い画面に出る。
 client.on('ready', () => {
     	console.log('ready...');
@@ -79,6 +81,13 @@ client.on('message', message => {
 				.catch(console.error);
 		}
 	}
+	else if(message.content === '!del')
+	{
+		if(channnel_name === str_voice_text_channel_name)
+		{
+			del_all_message_at_voice_text_channel();
+		}
+	}
 	
 	if (message.author.id === process.env.AD_ID) {
 		return;
@@ -96,6 +105,16 @@ client.on('message', message => {
 			console.log('del discord_link '+username);
 			message.delete();
 		}
+	}
+	function del_all_message_at_voice_text_channel()
+	{
+		let chls = client.channels.filter(chl => chl.name === str_voice_text_channel_name);
+		let chl = chls.first();
+		chl.fetchMessages({ limit: 100 })
+			.then(messages => {
+				messages.deleteAll();
+			})
+			.catch(console.error);
 	}
 	function do_after_get_comment()
 				{
